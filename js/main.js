@@ -1,23 +1,28 @@
-// VISTA® — LIVE MAP SPATIAL ENGINE (GITHUB PRODUCTION)
+// VISTA® — LIVE MAP SPATIAL ENGINE (GITHUB PRODUCTION FIXED)
 
-window.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     // Мгновенно удаляем лоадер заставки
     const loader = document.querySelector(".site-loader");
     if (loader) loader.remove();
 
+    // Проверяем, что Leaflet вообще загрузился на страницу
+    if (typeof L === "undefined") {
+        console.error("VISTA CORE: Leaflet library failed to load.");
+        return;
+    }
+
+    const mapContainer = document.querySelector('#map');
+    if (!mapContainer) return;
+
     // Ждем долю секунды, чтобы холст успел построиться, и включаем живую карту
     setTimeout(() => {
-        const mapContainer = document.querySelector('#map');
-        if (!mapContainer) return;
+        // Создаем карту и центрируем её между Лос-Анджелесом и Нью-Йорком (США)
+        const map = L.map('map').setView([37.0902, -95.7129], 4); 
 
-        // Создаем карту. Координаты [37.8, -96] — это центр США. Зум 4 — идеальный охват.
-        // ПРАВИЛЬНО: Инициализация карты в блоке <div id="map"></div>
-const map = L.map('map').setView([34.0522, -118.2437], 10); // Твои координаты центра карты
-
-// Подключение красивых темных киберпанк-плиток карты
-L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-}).addTo(map);
+        // Подключаем премиальные ночные плитки карты от CARTO
+        L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+        }).addTo(map);
 
         // Реальные географические координаты наших вилл (Широта и Долгота)
         const realEstateMarkers = [
@@ -55,24 +60,26 @@ L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
             }
         ];
 
-        // Кастомизируем маркер под наш оливковый стиль с неоновым пульсом
+                   // Кастомизируем маркер под наш оливковый стиль с неоновым пульсом (ПОЛНЫЙ ФИКС)
         const customIcon = L.divIcon({
             className: 'custom-map-marker',
             html: '<div class="pin-pulse"></div><div class="pin-dot"></div>',
-            iconSize: [16, 16],
-            iconAnchor: [8, 8]
+            iconSize: [16, 16],   // Это размеры нашей светящейся точки
+            iconAnchor: [8, 8]    // Это центрирование точки на карте
         });
 
-        // Расставляем рабочие маркеры
+
+
+        // Расставляем рабочие маркеры на карту
         realEstateMarkers.forEach(data => {
             // Верстка вылетающего окна при клике на точку
             const popupContent = `
                 <div class="map-popup-card">
                     <img src="${data.img}" alt="${data.name}" style="width:100%; height:110px; object-fit:cover; display:block;">
                     <div class="popup-meta" style="margin-top:8px;">
-                        <h4 style="font-size:11px; font-weight:700; text-transform:uppercase; margin:0; color:#111;">${data.name}</h4>
-                        <span style="font-size:9px; color:#384a37; font-weight:600; display:block; margin:3px 0 6px;">${data.price} // ${data.locText}</span>
-                        <a href="${data.link}" style="display:block; font-size:9px; font-weight:700; text-decoration:none; color:#111; border-top:1px solid #eee; padding-top:5px; letter-spacing:0.5px;">VIEW SPECIFICATION →</a>
+                        <h4 style="font-size:11px; font-weight:700; text-transform:uppercase; margin:0; color:#111; font-family:sans-serif;">${data.name}</h4>
+                        <span style="font-size:9px; color:#384a37; font-weight:600; display:block; margin:3px 0 6px; font-family:monospace;">${data.price} // ${data.locText}</span>
+                        <a href="${data.link}" style="display:block; font-size:9px; font-weight:700; text-decoration:none; color:#111; border-top:1px solid #eee; padding-top:5px; letter-spacing:0.5px; font-family:monospace;">VIEW SPECIFICATION →</a>
                     </div>
                 </div>
             `;
@@ -85,8 +92,8 @@ L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
                 });
         });
 
-        // Фикс, чтобы карта сразу правильно пересчитала размеры окна
-        setTimeout(() => { map.invalidateSize(); }, 200);
+        // Фикс, чтобы карта сразу правильно пересчитала размеры окна и не было серых/черных зон
+        setTimeout(() => { map.invalidateSize(); }, 300);
 
     }, 200);
 });
