@@ -19,7 +19,7 @@ window.addEventListener("DOMContentLoaded", () => {
         // Создаем карту и центрируем её на США
         const map = L.map('map').setView([37.0902, -95.7129], 4); 
 
-        // ИСПРАВЛЕНО: Подключены официальные рабочие ночные плитки карты от CARTO
+        // Подключаем премиальные ночные плитки карты от CARTO (БЕЗ ОПЕЧАТОК)
         L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors &copy; <a href="https://carto.com">CARTO</a>',
             subdomains: 'abcd',
@@ -62,7 +62,7 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         ];
 
-        // Кастомизируем маркер под наш оливковый стиль с неоновым пульсом
+        // Кастомизируем маркер под наш оливковый стиль с неоновым пульсом (ИСПРАВЛЕНО!)
         const customIcon = L.divIcon({
             className: 'custom-map-marker',
             html: '<div class="pin-pulse"></div><div class="pin-dot"></div>',

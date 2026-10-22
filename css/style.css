@@ -1118,10 +1118,7 @@ a:hover {
     z-index: 1 !important;
 }
 
-/* Фикс для плиток карты, чтобы они красиво вписывались в темный киберпанк-дизайн VISTA */
-.leaflet-tile-container img {
-    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%) !important; /* Превращаем обычную карту в ночную космическую */
-}
+
 
 /* Стилизуем всплывающие маркеры домов на карте под наш оливковый люкс */
 .leaflet-popup-content-wrapper {
