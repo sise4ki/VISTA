@@ -64,7 +64,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const customIcon = L.divIcon({
             className: 'custom-map-marker',
             html: '<div class="pin-pulse"></div><div class="pin-dot"></div>',
-            iconSize: ,
+            iconSize: [16, 16],
             iconAnchor: [8, 8]
         });
 
