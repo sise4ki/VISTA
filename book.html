@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Protocol Tour | VISTA®</title>
+    <link rel="stylesheet" href="css/style.css">
+          <!-- Локальное подключение EmailJS (Больше никаких ошибок сети!) -->
+       <!-- Локальное подключение EmailJS -->
+    <script src="js/email.min.js"></script>
+    <script>
+        if (typeof emailjs !== 'undefined') {
+            // ВАЖНО: Замени эту строку на свой реальный Public Key из личного кабинета EmailJS
+            // Он должен выглядеть примерно так: emailjs.init('user_R93jsKdk83kd93');
+            emailjs.init('NHhUg6GI7SGEqWbYY'); 
+        }
+    </script>
+
+
+<body class="editorial-property-body">
+
+    <!-- ФУТУРИСТИЧНАЯ ШАПКА -->
+    <header class="vista-editorial-header">
+        <a class="editorial-logo" href="index.html">VISTA<span>.</span></a>
+        <div class="header-right-actions">
+            <span class="editorial-ref-tag">WHITE-GLOVE VERIFICATION</span>
+            <a class="editorial-close-btn" href="index.html">← DISMISS CONCIERGE</a>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="booking-container">
+        <div class="booking-grid">
+            
+            <!-- ЛЕВАЯ ЧАСТЬ: ФОРМА -->
+            <section class="booking-form-section">
+                <h1 class="booking-title">REQUEST PRIVATE TOUR</h1>
+                
+                <form id="checkoutForm">
+                    <div class="form-step-block">
+    <h2 class="step-heading">1 / INQUIRER DETAILS</h2>
+    <div class="input-group-row">
+        <div class="input-field">
+            <label>GIVEN NAME</label>
+            <input type="text" name="given_name" placeholder="Alexander" required>
+        </div>
+        <div class="input-field">
+            <label>FAMILY NAME</label>
+            <input type="text" name="family_name" placeholder="Wright" required>
+        </div>
+    </div>
+    <div class="input-group-row">
+        <div class="input-field">
+            <label>SECURE EMAIL</label>
+            <input type="email" name="email" placeholder="alex@wright.com" required>
+        </div>
+        <div class="input-field">
+            <label>TELEPHONE CELL</label>
+            <input type="tel" name="phone" placeholder="+1 (310) 555-9000" required>
+        </div>
+    </div>
+</div>
+
+                    <!-- СЕКЦИЯ 2 -->
+                    <div class="form-step-block">
+                        <h2 class="step-heading">2 / TOUR CONFIGURATION</h2>
+                        
+                        <label class="custom-radio-container">
+                            <input type="radio" name="tour-type" checked>
+                            <span class="radio-tile">
+                                <strong>IN-PERSON PRIVATE PROTOCOL SHOWING</strong>
+                                <span class="tile-desc">Exclusive helicopter/limo transfer and full site analysis</span>
+                            </span>
+                        </label>
+
+                        <label class="custom-radio-container">
+                            <input type="radio" name="tour-type">
+                            <span class="radio-tile">
+                                <strong>REMOTE 4K TELEPRESENCE STREAM</strong>
+                                <span class="tile-desc">Encrypted private drone and internal spatial camera walkthrough</span>
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="protocol-submit-btn">SUBMIT PROTOCOL REQUEST ↗</button>
+                </form>
+
+                <!-- ЭКРАН УСПЕШНОЙ ОТПРАВКИ (Изначально скрыт в JS через hidden) -->
+                <div id="orderSuccess" hidden class="success-protocol-box">
+                    <h2 class="success-heading">PROTOCOL ENGAGED</h2>
+                    <p class="success-text">Your request hash is <strong id="orderReference">VS-XXXX</strong>. A VISTA lifestyle partner will coordinate your clearance and transfer timeline shortly.</p>
+                    <a href="index.html" class="success-back-btn">← BACK TO LOGISTICAL HUB</a>
+                </div>
+            </section>
+
+            <!-- ПРАВАЯ ЧАСТЬ: ВЫБРАННЫЙ ДОМ (Сводка) -->
+            <section class="booking-summary-section">
+                <div class="sticky-summary-box">
+                    <span class="summary-tag">// SELECTED INVESTMENTS</span>
+                    
+                    <!-- Сюда твой JS динамически вставит карточку выбранного дома (#checkoutItems) -->
+                    <div id="checkoutItems"></div>
+
+                    <div class="asset-value-row">
+                        <label>ESTATE ASSET VALUE</label>
+                        <span id="checkoutTotal">$ 0.00</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+    <!-- Подключаем базу данных VISTA (ОБЯЗАТЕЛЬНО ДОЛЖНА БЫТЬ ВЫШЕ ЧЕКАУТА) -->
+    <script src="js/properties-data.js"></script> 
+    
+    <!-- Твой текущий скрипт обработки оформления (Revenue / Acquisition Processing) -->
+    <script src="js/checkout.js"></script> 
+</body>
+</html>
+
+</body>
+</html>
