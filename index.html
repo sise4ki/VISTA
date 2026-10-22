@@ -110,14 +110,10 @@
         </section>
     </main>
 
-    <!-- ПОДКЛЮЧАЕМ СКРИПТЫ: GSAP, REAL MAP И НАШУ ЛОГИКУ -->
-    <!-- Библиотека GSAP (через официальный cdnjs от Cloudflare) -->
+     <!-- ПОДКЛЮЧАЕМ СКРИПТЫ: GSAP И НАШУ АВТОНОМНУЮ ЛОГИКУ -->
     <script src="https://cloudflare.com"></script>
 
-    <!-- Движок карты Leaflet (Полный путь к JS файлу на Cloudflare CDN) -->
-    <script src="https://cloudflare.com"></script>
-
-    <!-- ТВОИ СКРИПТЫ КАРТЫ (ЗАПУСКАЮТСЯ СТРОГО ПОСЛЕ БИБЛИОТЕК) -->
+    <!-- ТВОИ СКРИПТЫ (main.js теперь сам содержит внутри движок карты!) -->
     <script src="js/properties-data.js"></script>
     <script src="js/saved.js"></script>
     <script src="js/main.js"></script>
