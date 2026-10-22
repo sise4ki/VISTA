@@ -1,4 +1,4 @@
-// VISTA® — LIVE MAP SPATIAL ENGINE (FINAL STABLE PRODUCTION)
+// VISTA® — SPATIAL CORE ENGINE (PROPERSTAR STYLING)
 
 window.addEventListener("DOMContentLoaded", () => {
     // Мгновенно удаляем лоадер заставки
@@ -9,24 +9,23 @@ window.addEventListener("DOMContentLoaded", () => {
     const mapContainer = document.querySelector('#map');
     if (!mapContainer) return;
 
-    // Ждем долю секунды, чтобы холст успел построиться, и включаем живую карту
+    // Инициализация карты
     setTimeout(() => {
         if (typeof L === "undefined") {
             console.error("VISTA CORE: Leaflet library failed to load.");
             return;
         }
 
-        // Создаем карту и центрируем её на США
-        const map = L.map('map').setView([37.0902, -95.7129], 4); 
+        // Центрируем карту выше (ближе к Канаде/США) и ставим зум 3, как на скриншоте
+        const map = L.map('map').setView([47.0902, -95.7129], 3); 
 
-        // Подключаем премиальные ночные плитки карты от CARTO (БЕЗ ОПЕЧАТОК)
-        L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors &copy; <a href="https://carto.com">CARTO</a>',
-            subdomains: 'abcd',
-            maxZoom: 20
+        // ИСПРАВЛЕНО: Подключаем светлые классические плитки OpenStreetMap с голубыми океанами
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+            maxZoom: 19
         }).addTo(map);
 
-        // Реальные географические координаты наших вилл (Широта и Долгота)
+        // Географические координаты твоих вилл
         const realEstateMarkers = [
             {
                 coords: [34.0259, -118.7798], // Малибу
@@ -62,15 +61,15 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         ];
 
-        // Кастомизируем маркер под наш оливковый стиль с неоновым пульсом (ИСПРАВЛЕНО!)
+        // Кастомизируем маркер: на скриншоте круглые маркеры с числом или точкой
         const customIcon = L.divIcon({
             className: 'custom-map-marker',
-            html: '<div class="pin-pulse"></div><div class="pin-dot"></div>',
-            iconSize: [16, 16],
-            iconAnchor: [8, 8]
+            html: '<div class="pin-pulse-light"></div><div class="pin-dot-proper"></div>',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
         });
 
-        // Расставляем рабочие маркеры
+        // Расставляем маркеры на карте
         realEstateMarkers.forEach(data => {
             const popupContent = `
                 <div class="map-popup-card">
@@ -91,7 +90,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 });
         });
 
-        // Фикс, чтобы карта сразу правильно пересчитала размеры окна
+        // Принудительный пересчет размеров
         setTimeout(() => { map.invalidateSize(); }, 300);
 
     }, 200);
