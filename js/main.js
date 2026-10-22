@@ -19,10 +19,9 @@ window.addEventListener("DOMContentLoaded", () => {
         // Создаем карту и центрируем её на США
         const map = L.map('map').setView([37.0902, -95.7129], 4); 
 
-        // Подключаем премиальные ночные плитки карты от CARTO
         L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-        }).addTo(map);
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+}).addTo(map);
 
         // Реальные географические координаты наших вилл (Широта и Долгота)
         const realEstateMarkers = [
