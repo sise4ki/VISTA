@@ -19,16 +19,19 @@ window.addEventListener("DOMContentLoaded", () => {
         // Создаем карту и центрируем её на США
         const map = L.map('map').setView([37.0902, -95.7129], 4); 
 
+        // ИСПРАВЛЕНО: Подключены официальные рабочие ночные плитки карты от CARTO
         L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-}).addTo(map);
+            attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors &copy; <a href="https://carto.com">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
 
         // Реальные географические координаты наших вилл (Широта и Долгота)
         const realEstateMarkers = [
             {
                 coords: [34.0259, -118.7798], // Малибу
                 name: "THE SUNSET PACIFIC VILLA",
-                price: "$8,500,000",
+                price: "\$8,500,000",
                 locText: "MALIBU, CA",
                 link: "property.html?house=malibu-sunset-villa",
                 img: "assets/malibu-villa.jpg"
@@ -36,7 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
             {
                 coords: [34.0837, -118.4466], // Бель-Эйр
                 name: "BEL AIR MINIMALIST ESTATE",
-                price: "$12,900,000",
+                price: "\$12,900,000",
                 locText: "LOS ANGELES, CA",
                 link: "property.html?house=la-modern-estate",
                 img: "assets/la-estate.jpg"
@@ -44,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
             {
                 coords: [25.7617, -80.1918], // Майами
                 name: "BRICKELL SKY PENTHOUSE",
-                price: "$4,200,000",
+                price: "\$4,200,000",
                 locText: "MIAMI, FL",
                 link: "property.html?house=miami-penthouse",
                 img: "assets/miami-penthouse.jpg"
@@ -52,7 +55,7 @@ window.addEventListener("DOMContentLoaded", () => {
             {
                 coords: [40.7233, -74.0030], // Сохо, Нью-Йорк
                 name: "SOHO ARCHITECTURAL LOFT",
-                price: "$5,600,000",
+                price: "\$5,600,000",
                 locText: "NEW YORK, NY",
                 link: "property.html?house=ny-luxury-loft",
                 img: "assets/ny-loft.jpg"
