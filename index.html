@@ -115,12 +115,17 @@
 
     </main>
 
-    <!-- ПОДКЛЮЧАЕМ СКРИПТЫ: GSAP, REAL MAP И НАШУ ЛОГИКУ -->
+        <!-- ПОДКЛЮЧАЕМ СКРИПТЫ: GSAP, REAL MAP И НАШУ ЛОГИКУ (ИСПРАВЛЕНО) -->
+    <!-- Библиотека GSAP (через официальный cdnjs от Cloudflare) -->
     <script src="https://cloudflare.com"></script>
+    
+    <!-- Движок карты Leaflet (Полный путь к JS файлу) -->
     <script src="https://unpkg.com"></script>
     
+    <!-- ТВОИ СКРИПТЫ КАРТЫ (ЗАПУСКАЮТСЯ СТРОГО ПОСЛЕ БИБЛИОТЕК) -->
     <script src="js/properties-data.js"></script>
     <script src="js/saved.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
+

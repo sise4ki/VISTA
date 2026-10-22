@@ -11,18 +11,13 @@ window.addEventListener("DOMContentLoaded", () => {
         if (!mapContainer) return;
 
         // Создаем карту. Координаты [37.8, -96] — это центр США. Зум 4 — идеальный охват.
-        const map = L.map('map', {
-            zoomControl: true, // Включает встроенные рабочие кнопки + и -
-            minZoom: 2,
-            maxZoom: 14
-        }).setView([37.8, -96], 4);
+        // ПРАВИЛЬНО: Инициализация карты в блоке <div id="map"></div>
+const map = L.map('map').setView([34.0522, -118.2437], 10); // Твои координаты центра карты
 
-        // Подкачиваем из сети стильную светлую хай-тек подложку без лишней каши
-        L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-            subdomains: 'abcd',
-            maxZoom: 20
-        }).addTo(map);
+// Подключение красивых темных киберпанк-плиток карты
+L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+}).addTo(map);
 
         // Реальные географические координаты наших вилл (Широта и Долгота)
         const realEstateMarkers = [
