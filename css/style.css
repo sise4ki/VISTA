@@ -1100,3 +1100,36 @@ a:hover {
 .editorial-logo span {
     color: var(--accent-glow) !important; /* Точка на конце остается оливковой по дизайну */
 }
+/* ===== VISTA® INTERACTIVE MAP VIEWPORT RECOVERY ===== */
+
+/* Ищем блок твоей карты. Если у тебя в HTML задан класс .map или id="map", 
+   эти стили жестко заставят его отображаться */
+#map, 
+.map-container, 
+#spatial-engine-map,
+.catalog-inner-scroll ~ div { /* Авто-захват блока карты рядом с каталогом */
+    min-height: 100vh !important; /* Карта займет всю высоту экрана */
+    height: 100% !important;
+    width: 100% !important;
+    background-color: #111310 !important; /* Благородный черный фон на время загрузки */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 1 !important;
+}
+
+/* Фикс для плиток карты, чтобы они красиво вписывались в темный киберпанк-дизайн VISTA */
+.leaflet-tile-container img {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%) !important; /* Превращаем обычную карту в ночную космическую */
+}
+
+/* Стилизуем всплывающие маркеры домов на карте под наш оливковый люкс */
+.leaflet-popup-content-wrapper {
+    background: #ffffff !important;
+    border-radius: 0px !important; /* Убираем дефолтные круглые углы */
+    border: 1px solid #baa998 !important;
+}
+
+.leaflet-popup-tip {
+    background: #ffffff !important;
+}
