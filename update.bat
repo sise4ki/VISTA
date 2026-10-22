@@ -1,6 +1,5 @@
-git config --global user.email "skrt866@gmail.com"
-git config --global user.name "sise4ki"
+git remote set-url origin https://github.com
 git add .
-git commit -m "auto-update site"
-git push -u origin master
+git commit -m "auto-update site with features and fixes"
+git push -u origin master:main
 pause
