@@ -63,13 +63,14 @@ window.addEventListener("DOMContentLoaded", () => {
             }
         ];
 
-        // Кастомизируем маркер под наш оливковый стиль с неоновым пульсом
+                // Кастомизируем маркер под наш оливковый стиль с неоновым пульсом
         const customIcon = L.divIcon({
             className: 'custom-map-marker',
             html: '<div class="pin-pulse"></div><div class="pin-dot"></div>',
             iconSize: [16, 16],
             iconAnchor: [8, 8]
         });
+
 
         // Расставляем маркеры на карту
         realEstateMarkers.forEach(data => {

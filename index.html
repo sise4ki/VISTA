@@ -5,8 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISTA® / Interactive Spatial Hub</title>
     
-    <!-- ПОДКЛЮЧАЕМ СТИЛИ ЖИВОЙ ОНЛАЙН-КАРТЫ ЧЕРЕЗ CLOUDFLARE CDN -->
-    <link rel="stylesheet" href="https://cloudflare.com" />
+    <!-- ВСТРОЕННЫЕ КРИТИЧЕСКИЕ СТИЛИ КАРТЫ (ЧТОБЫ КАРТА НЕ БЫЛА ЧЕРНОЙ) -->
+    <style>
+        .leaflet-container{overflow:hidden;background:#111310;font-family:sans-serif;touch-action:none}
+        .leaflet-container img{max-width:none!important;max-height:none!important;padding:0!important;margin:0!important}
+        .leaflet-pane,.leaflet-tile-container{position:absolute;left:0;top:0;z-index:400}
+        .leaflet-tile{filter:inherit;visibility:hidden}
+        .leaflet-tile-loaded{visibility:visible}
+        .leaflet-map-pane svg{position:absolute;z-index:200}
+        .leaflet-marker-icon,.leaflet-marker-shadow{position:absolute;left:0;top:0;display:block;user-select:none}
+        .leaflet-popup{position:absolute;text-align:center;bottom:0;left:-110px;cursor:default}
+        .leaflet-popup-content-wrapper{padding:1px;text-align:left;background:#fff}
+        .leaflet-popup-content{margin:13px 24px 10px 14px;line-height:1.3}
+    </style>
+    
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -29,11 +41,10 @@
 
     <!-- ИНТЕРАКТИВНЫЙ ДВУХПАНЕЛЬНЫЙ ХАБ -->
     <main class="spatial-interface">
-        <!-- ЛЕВАЯ ПАНЕЛЬ: ТУТ БУДЕТ НАСТОЯЩАЯ ЖИВАЯ КАРТА НА ГИТХАБЕ -->
         <section class="map-panel-side">
             <div id="map"></div>
         </section>
-        <!-- ПРАВАЯ ПАНЕЛЬ: КАТАЛОГ С ВНУТРЕННИМ СКРОЛЛОМ -->
+
         <section class="catalog-panel-side" id="collection">
             <div class="catalog-inner-scroll">
                 <div class="catalog-header-text">
@@ -41,9 +52,7 @@
                     <h1>REAL ESTATE LISTINGS</h1>
                 </div>
 
-                <!-- КАТАЛОГ ВИЛЛ -->
                 <div class="product-grid">
-                    <!-- Карточка 1: Malibu -->
                     <article class="product-card" onclick="window.location.href='property.html?house=malibu-sunset-villa'">
                         <div class="product-visual">
                             <button class="wishlist-button" type="button" data-wishlist-id="malibu-sunset-villa">♡</button>
@@ -56,9 +65,7 @@
                             <p class="product-price">$ 8,500,000</p>
                         </div>
                     </article>
-                    <!-- Остальные карточки каталога (Miami, Bel Air, Soho) можно найти в полной версии кода -->
-                </div>
-                    <!-- Карточка 2: Miami -->
+
                     <article class="product-card" onclick="window.location.href='property.html?house=miami-penthouse'">
                         <div class="product-visual">
                             <button class="wishlist-button" type="button" data-wishlist-id="miami-penthouse">♡</button>
@@ -72,7 +79,6 @@
                         </div>
                     </article>
 
-                    <!-- Карточка 3: Bel Air -->
                     <article class="product-card" onclick="window.location.href='property.html?house=la-modern-estate'">
                         <div class="product-visual">
                             <button class="wishlist-button" type="button" data-wishlist-id="la-modern-estate">♡</button>
@@ -86,7 +92,6 @@
                         </div>
                     </article>
 
-                    <!-- Карточка 4: Soho -->
                     <article class="product-card" onclick="window.location.href='property.html?house=ny-luxury-loft'">
                         <div class="product-visual">
                             <button class="wishlist-button" type="button" data-wishlist-id="ny-luxury-loft">♡</button>
@@ -101,7 +106,6 @@
                     </article>
                 </div>
 
-                <!-- FOOTER -->
                 <footer class="site-footer">
                     <div class="footer-copyright">VISTA ARCHITECTURAL INVENTORY © 2026</div>
                     <a href="index.html" class="footer-link">VISTA.SPACE</a>
@@ -110,10 +114,7 @@
         </section>
     </main>
 
-     <!-- ПОДКЛЮЧАЕМ СКРИПТЫ: GSAP И НАШУ АВТОНОМНУЮ ЛОГИКУ -->
     <script src="https://cloudflare.com"></script>
-
-    <!-- ТВОИ СКРИПТЫ (main.js теперь сам содержит внутри движок карты!) -->
     <script src="js/properties-data.js"></script>
     <script src="js/saved.js"></script>
     <script src="js/main.js"></script>
