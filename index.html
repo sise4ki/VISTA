@@ -6,7 +6,8 @@
     <title>VISTA® / Interactive Spatial Hub</title>
     
     <!-- ИСПРАВЛЕНО: Теперь тут реальный адрес стилей карты, а не заглушка Cloudflare -->
-    <link rel="stylesheet" href="https://cloudflare.com" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -106,8 +107,7 @@
         </section>
     </main>
 
-       <!-- 1. Сначала движок карты -->
-    <script src="https://cloudflare.com"></script>
+      
 
     <!-- 2. Потом база домов -->
     <script src="js/properties-data.js"></script>
