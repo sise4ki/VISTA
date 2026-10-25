@@ -3,9 +3,11 @@
 // ==========================================================================
 
 // 🚨 НАСТРОЙКА EMAILJS: Обязательно вставь сюда свои ключи из личного кабинета EmailJS!
-const EMAILJS_PUBLIC_KEY  = "NHhUg6GI7SGEqWbYY";   // Брать во вкладке Account -> API Keys
-const EMAILJS_SERVICE_ID  = "service_addicku";   // Брать во вкладке Email Services (например, service_xxxxxxx)
-const EMAILJS_TEMPLATE_ID = "template_fotdhjc";  // Брать во вкладке Email Templates (например, template_xxxxxxx)
+// ВСТАВЬ СВОИ РЕАЛЬНЫЕ БУКВЕННО-ЦИФРОВЫЕ ИДЕНТИФИКАТОРЫ СТРОГО В КАВЫЧКАХ
+const EMAILJS_PUBLIC_KEY  = "NHhUg6GI7SGEqWbYY";   
+const EMAILJS_SERVICE_ID  = "service_addicku";   
+const EMAILJS_TEMPLATE_ID = "template_fotdhjc";  
+
 
 window.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("#checkoutForm");
