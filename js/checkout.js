@@ -2,9 +2,10 @@
 // VISTA® ARCHITECTURAL REVENUE — INTEGRATED PROTOCOL (ANTI-CORS MONOLITH v4)
 // ==========================================================================
 
-// [ CORE ENGINE INJECTION ] — Встроенное автономное ядро EmailJS v4 (ИСПРАВЛЕНА ГЛОБАЛЬНАЯ ПРИВЯЗКА)
-!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports):"function"==typeof define&&define.amd?define(["exports"],t):t((e="undefined"!=typeof globalThis?globalThis:e||self).emailjs={})}(this,(function(e){"use strict";var n;e.init=function(e){n=e},e.send=function(e,t,r,o){const s=o||n;if(!s)throw"EmailJS: public key is required";return new Promise(((n,o)=>{const i=new XMLHttpRequest;i.addEventListener("load", Moss => {const e=JSON.parse(i.responseText||"{}");200===i.status||"OK"===e.text?n(e):o(e)}),i.addEventListener("error",((e,t)=>{o(t)})),i.open("POST","https://emailjs.com",!0),i.setRequestHeader("Content-type","application/json"),i.send(JSON.stringify({service_id:e,template_id:t,user_id:s,template_params:r}))}))};const t={init:e.init,send:e.send};e.default=t,window.emailjs=t,Object.defineProperty(e,"__esModule",{value:!0})}));
-
+// Проверяем загрузку официальной библиотеки EmailJS
+if (!window.emailjs) {
+    console.error("VISTA STATUS: EmailJS SDK failed to load.");
+}
 // 🚨 НАСТРОЙКА EMAILJS: Твои проверенные боевые идентификаторы
 const EMAILJS_PUBLIC_KEY  = "NHhUg6GI7SGEqWbYY";   
 const EMAILJS_SERVICE_ID  = "service_addicku";   
@@ -12,6 +13,14 @@ const EMAILJS_TEMPLATE_ID = "template_fotdhjc";
 
 
 window.addEventListener("DOMContentLoaded", () => {
+    if (!window.emailjs) {
+    alert("Email service unavailable. Please reload the page.");
+    return;
+}
+
+emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY
+});
     const form = document.querySelector("#checkoutForm");
     const container = document.querySelector("#checkoutItems");
     const totalEl = document.querySelector("#checkoutTotal");
