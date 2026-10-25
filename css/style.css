@@ -1157,3 +1157,29 @@ a:hover {
     animation: pinMarkerPulseGlow 2.5s infinite ease-out !important;
     z-index: 4 !important;
 }
+.custom-map-marker {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.pin-dot-proper {
+    width: 12px !important;
+    height: 12px !important;
+    background: #007bff !important; /* Насыщенный синий акцент */
+    border: 2px solid #ffffff !important;
+    border-radius: 50% !important;
+    z-index: 5 !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25) !important;
+}
+
+.pin-pulse-light {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: #007bff !important;
+    border-radius: 50% !important;
+    opacity: 0.35 !important;
+    animation: pinMarkerPulseGlow 2.5s infinite ease-out !important;
+    z-index: 4 !important;
+}

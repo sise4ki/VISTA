@@ -1,67 +1,78 @@
-// VISTA® — SPATIAL CORE ENGINE (PROPERSTAR STYLING)
+// VISTA® — IMAGE-BASED SPATIAL CORE ENGINE (100% OFFLINE / PROPERSTAR STYLING)
 
 window.addEventListener("DOMContentLoaded", () => {
     // Мгновенно удаляем лоадер заставки
     const loader = document.querySelector(".site-loader");
     if (loader) loader.remove();
 
-    // Проверяем, что холст карты существует на странице
     const mapContainer = document.querySelector('#map');
     if (!mapContainer) return;
 
-    // Инициализация карты
     setTimeout(() => {
         if (typeof L === "undefined") {
             console.error("VISTA CORE: Leaflet library failed to load.");
             return;
         }
 
-        // Центрируем карту выше (ближе к Канаде/США) и ставим зум 3, как на скриншоте
-        const map = L.map('map').setView([47.0902, -95.7129], 3); 
+        // 1. НАСТРОЙКА ХОЛСТА ПОД ЛОКАЛЬНОЕ ИЗОБРАЖЕНИЕ
+        // Включаем простую пиксельную сетку вместо географических координат
+        const map = L.map('map', {
+            crs: L.CRS.Simple,
+            minZoom: -2, // Позволяет полностью отдалить карту, чтобы увидеть её целиком
+            maxZoom: 2,  // Дает плавное приближение ровно в 4 шага масштаба
+            zoomDelta: 1,
+            snapZoom: 1
+        });
 
-        // ИСПРАВЛЕНО: Подключаем светлые классические плитки OpenStreetMap с голубыми океанами
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-            maxZoom: 19
-        }).addTo(map);
+        // 2. РАЗМЕРЫ ТВОЕЙ КАРТИНКИ (2400 x 1460 px)
+        const w = 2400;
+        const h = 1460;
+        const bounds = [[0, 0], [h, w]];
 
-        // Географические координаты твоих вилл
+        // Накладываем изображение карты из папки assets
+        L.imageOverlay('assets/map-bg.jpg', bounds).addTo(map);
+
+        // Автоматически центрируем объектив камеры строго по границам фотки
+        map.fitBounds(bounds);
+
+        // 3. ПИКСЕЛЬНЫЕ КООРДИНАТЫ ДОМОВ НА ФОТО КАРТЫ [Высота Y, Ширина X]
+        // Все маркеры выровнены по пикселям от левого нижнего угла картинки
         const realEstateMarkers = [
             {
-                coords: [34.0259, -118.7798], // Малибу
+                pixelCoords: [610, 240], // Малибу (Западное побережье, снизу)
                 name: "THE SUNSET PACIFIC VILLA",
-                price: "\$8,500,000",
+                price: "$8,500,000",
                 locText: "MALIBU, CA",
                 link: "property.html?house=malibu-sunset-villa",
                 img: "assets/malibu-villa.jpg"
             },
             {
-                coords: [34.0837, -118.4466], // Бель-Эйр
+                pixelCoords: [660, 260], // Бель-Эйр (Чуть выше и правее Малибу в Лос-Анджелесе)
                 name: "BEL AIR MINIMALIST ESTATE",
-                price: "\$12,900,000",
+                price: "$12,900,000",
                 locText: "LOS ANGELES, CA",
                 link: "property.html?house=la-modern-estate",
                 img: "assets/la-estate.jpg"
             },
             {
-                coords: [25.7617, -80.1918], // Майами
+                pixelCoords: [210, 1920], // Майами (Флорида, Юго-Восток)
                 name: "BRICKELL SKY PENTHOUSE",
-                price: "\$4,200,000",
+                price: "$4,200,000",
                 locText: "MIAMI, FL",
                 link: "property.html?house=miami-penthouse",
                 img: "assets/miami-penthouse.jpg"
             },
             {
-                coords: [40.7233, -74.0030], // Сохо, Нью-Йорк
+                pixelCoords: [980, 2120], // Сохо, Нью-Йорк (Северо-Восток)
                 name: "SOHO ARCHITECTURAL LOFT",
-                price: "\$5,600,000",
+                price: "$5,600,000",
                 locText: "NEW YORK, NY",
                 link: "property.html?house=ny-luxury-loft",
                 img: "assets/ny-loft.jpg"
             }
         ];
 
-        // Кастомизируем маркер: на скриншоте круглые маркеры с числом или точкой
+        // Кастомизируем маркер под премиальный синий стиль Properstar с пульсацией
         const customIcon = L.divIcon({
             className: 'custom-map-marker',
             html: '<div class="pin-pulse-light"></div><div class="pin-dot-proper"></div>',
@@ -69,7 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
             iconAnchor: [10, 10]
         });
 
-        // Расставляем маркеры на карте
+        // Отрисовываем маркеры по рассчитанной пиксельной сетке
         realEstateMarkers.forEach(data => {
             const popupContent = `
                 <div class="map-popup-card">
@@ -82,7 +93,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-            L.marker(data.coords, { icon: customIcon })
+            L.marker(data.pixelCoords, { icon: customIcon })
                 .addTo(map)
                 .bindPopup(popupContent, {
                     maxWidth: 240,
@@ -90,7 +101,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 });
         });
 
-        // Принудительный пересчет размеров
+        // Команда пересчета для предотвращения серых зон
         setTimeout(() => { map.invalidateSize(); }, 300);
 
     }, 200);

@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISTA® / Interactive Spatial Hub</title>
     
-    <!-- ПОДКЛЮЧАЕМ ПОЛНЫЕ ОФИЦИАЛЬНЫЕ СТИЛИ КАРТЫ -->
-    <!-- ПОДКЛЮЧАЕМ ПОЛНЫЕ ОФИЦИАЛЬНЫЕ СТИЛИ КАРТЫ -->
-<link rel="stylesheet" href="https://cloudflare.com" />
-<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <!-- TECH LOADER -->
     <div class="site-loader">
         <div class="loader-word">VISTA<span>.</span>SPACE</div>
@@ -30,7 +27,7 @@
 
     <!-- ИНТЕРАКТИВНЫЙ ДВУХПАНЕЛЬНЫЙ ХАБ -->
     <main class="spatial-interface">
-        <!-- ЛЕВАЯ ПАНЕЛЬ: ТУТ БУДЕТ НАСТОЯЩАЯ ЖИВАЯ КАРТА НА ГИТХАБЕ -->
+        <!-- ЛЕВАЯ ПАНЕЛЬ С КАРТОЙ -->
         <section class="map-panel-side">
             <div id="map"></div>
         </section>
@@ -106,14 +103,12 @@
         </section>
     </main>
 
- <!-- ПОДКЛЮЧАЕМ ПОЛНЫЕ ОФИЦИАЛЬНЫЕ БИБЛИОТЕКИ -->
-<script src="https://cloudflare.com"></script>
-
-
-    <!-- ТВОИ СКРИПТЫ (ЗАПУСКАЮТСЯ СТРОГО ПОСЛЕ КАРТЫ) -->
+    <!-- КРИТИЧЕСКИ ВАЖНО: КАРТА ИНИЦИАЛИЗИРУЕТСЯ СТРОГО СНАЧАЛА -->
     <script src="https://cloudflare.com"></script>
-<script src="js/properties-data.js"></script>
-<script src="js/saved.js"></script>
-<script src="js/main.js"></script>
+
+    <!-- ТВОИ СКРИПТЫ СЛЕДУЮТ СТРОГО ЗА КАРТОЙ -->
+    <script src="js/properties-data.js"></script>
+    <script src="js/saved.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

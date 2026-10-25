@@ -1,5 +1,43 @@
-git remote set-url origin https://github.com/sise4ki/VISTA.git
+@echo off
+chcp 65001 >nul
+echo ===================================================
+echo     VISTA SPATIAL PROTOCOL — ДЕПЛОЙ НА GITHUB
+echo ===================================================
+echo.
+
+:: Шаг 1: Проверяем статус файлов
+echo [1/3] Сканирование измененных файлов активов...
+git status
+echo.
+
+:: Шаг 2: Добавляем все файлы в индекс Git
+echo Добавление файлов в коммит...
 git add .
-git commit -m "auto-update site with features and fixes"
-git push -f origin master:main
+
+:: Шаг 3: Создаем коммит с авто-датой и временем, чтобы не писать текст вручную
+set "commit_msg=VISTA Core Update: %date% %time%"
+echo Создание слепка системы...
+git commit -m "%commit_msg%"
+echo.
+
+:: Шаг 4: Отправляем файлы на сервер GitHub
+echo [2/3] Синхронизация с удаленным сервером GitHub...
+:: По умолчанию ветка обычно называется main или master. 
+:: Если у тебя ветка называется master, замени слово main на master в строке ниже!
+git push origin main
+
+if %errorlevel% equ 0 (
+    echo.
+    echo ===================================================
+    echo   [3/3] УСПЕШНО! ВСЕ ФАЙЛЫ ПРОЕКТА НА ГИТХАБЕ!
+    echo   Ссылка на сайт: https://github.io
+    echo ===================================================
+) else (
+    echo.
+    echo ---------------------------------------------------
+    echo   [ОШИБКА] Не удалось отправить файлы на GitHub.
+    echo   Проверь интернет или название ветки (main / master).
+    echo ---------------------------------------------------
+)
+
 pause
