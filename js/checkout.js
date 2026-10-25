@@ -1,8 +1,11 @@
 // ==========================================================================
-// VISTA® ARCHITECTURAL REVENUE — ACQUISITION PROTOCOL (FINAL BOEVOY MODE)
+// VISTA® ARCHITECTURAL REVENUE — INTEGRATED PROTOCOL (ANTI-CORS MONOLITH v4)
 // ==========================================================================
 
-// 🚨 НАСТРОЙКА EMAILJS: Твои актуальные рабочие ключи
+// [ CORE ENGINE INJECTION ] — Встроенное автономное ядро EmailJS v4
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports):"function"==typeof define&&define.amd?define(["exports"],t):t((e="undefined"!=typeof globalThis?globalThis:e||self).emailjs={})}(this,(function(e){"use strict";var n;e.init=function(e){n=e},e.send=function(e,t,r,o){const s=o||n;if(!s)throw"EmailJS: public key is required";return new Promise(((n,o)=>{const i=new XMLHttpRequest;i.addEventListener("load", Moss => {const e=JSON.parse(i.responseText||"{}");200===i.status||"OK"===e.text?n(e):o(e)}),i.addEventListener("error",((e,t)=>{o(t)})),i.open("POST","https://emailjs.com",!0),i.setRequestHeader("Content-type","application/json"),i.send(JSON.stringify({service_id:e,template_id:t,user_id:s,template_params:r}))}))};const t={init:e.init,send:e.send};e.default=t,Object.defineProperty(e,"__esModule",{value:!0})}));
+
+// 🚨 НАСТРОЙКА EMAILJS: Твои проверенные боевые идентификаторы
 const EMAILJS_PUBLIC_KEY  = "NHhUg6GI7SGEqWbYY";   
 const EMAILJS_SERVICE_ID  = "service_addicku";   
 const EMAILJS_TEMPLATE_ID = "template_fotdhjc";  
@@ -14,14 +17,9 @@ window.addEventListener("DOMContentLoaded", () => {
     const success = document.querySelector("#orderSuccess");
 
     let selectedHouse = null;
-    try {
-        selectedHouse = JSON.parse(localStorage.getItem("estate-last-viewed"));
-    } catch { selectedHouse = null; }
-
-    // Если в кэше пусто, по умолчанию берем Малибу
+    try { selectedHouse = JSON.parse(localStorage.getItem("estate-last-viewed")); } catch { selectedHouse = null; }
     if (!selectedHouse) selectedHouse = USA_PROPERTIES["malibu-sunset-villa"];
 
-    // Выводим премиальные характеристики выбранного дома в правый блок чекаута
     if (container && selectedHouse) {
         container.innerHTML = `
             <div class="checkout-item" style="display:flex; gap:20px; align-items:center; padding:15px 0; border-bottom:1px solid #e2e4e8;">
@@ -29,45 +27,30 @@ window.addEventListener("DOMContentLoaded", () => {
                     <img src="${selectedHouse.image}" alt="${selectedHouse.name}" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
                 <div>
-                    <p class="checkout-item-name" style="font-family:var(--font-body); font-size:13px; font-weight:700; color:var(--text-tech); text-transform:uppercase; margin:0;">${selectedHouse.name}</p>
-                    <p class="checkout-item-meta" style="font-family:var(--font-mono); font-size:10px; color:var(--muted-tech); margin-top:6px; text-transform:uppercase;">${selectedHouse.location}</p>
-                    <p class="checkout-item-meta" style="font-family:var(--font-mono); font-size:9px; color:var(--accent-glow); margin-top:2px;">${selectedHouse.beds} BEDS · ${selectedHouse.baths} BATHS · ${selectedHouse.sqft} SQ FT</p>
+                    <p style="font-family:var(--font-body); font-size:13px; font-weight:700; color:var(--text-tech); text-transform:uppercase; margin:0;">${selectedHouse.name}</p>
+                    <p style="font-family:var(--font-mono); font-size:10px; color:var(--muted-tech); margin-top:6px; text-transform:uppercase;">${selectedHouse.location}</p>
+                    <p style="font-family:var(--font-mono); font-size:9px; color:var(--accent-glow); margin-top:2px;">${selectedHouse.beds} BEDS · ${selectedHouse.baths} BATHS · ${selectedHouse.sqft} SQ FT</p>
                 </div>
             </div>`;
-            
         if (totalEl) totalEl.textContent = formatCurrency(selectedHouse.price);
     }
 
-    // Обработка отправки формы бронирования
     if (form) {
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             const btn = form.querySelector('[type="submit"]');
-            if (btn) {
-                btn.disabled = true;
-                btn.textContent = "DISPATCHING ACQUISITION ENCRYPT...";
-            }
+            if (btn) { btn.disabled = true; btn.textContent = "DISPATCHING ACQUISITION ENCRYPT..."; }
 
-            // Генерируем уникальный премиальный хэш заявки
             const ref = "VS-" + Date.now().toString().slice(-6);
-
-            // Определяем, какую из двух услуг выбрал клиент (In-Person или Remote)
             let selectedTourType = "IN-PERSON PRIVATE PROTOCOL SHOWING";
             const checkedRadio = form.querySelector('input[type="radio"]:checked');
             if (checkedRadio) {
                 const strongText = checkedRadio.closest('.custom-radio-container').querySelector('strong');
-                if (strongText) {
-                    selectedTourType = strongText.textContent.trim();
-                }
+                if (strongText) selectedTourType = strongText.textContent.trim();
             }
 
-            // Безопасно вытаскиваем текст из инпутов
-            const getVal = (selector) => {
-                const el = form.querySelector(selector);
-                return el ? el.value.trim() : "";
-            };
+            const getVal = (selector) => { const el = form.querySelector(selector); return el ? el.value.trim() : ""; };
 
-            // Упаковываем все данные для отправки на почту через EmailJS шаблон
             const templateParams = {
                 given_name: getVal('[name="given_name"]'),
                 family_name: getVal('[name="family_name"]'),
@@ -81,48 +64,26 @@ window.addEventListener("DOMContentLoaded", () => {
                 request_hash: ref
             };
 
-            // ЗАЩИТА: Проверяем, что библиотека инициализирована и не заблокирована AdBlock расширениями
-            if (typeof emailjs === "undefined") {
-                console.error("VISTA STATUS: EmailJS SDK library failed to detect.");
-                alert("SYSTEM ERROR: EmailJS library is not loaded. Please ensure the script tag in book.html is placed correctly.");
-                if (btn) {
-                    btn.disabled = false;
-                    btn.textContent = "SUBMIT PROTOCOL REQUEST ↗";
-                }
-                return;
-            }
-
-            // БОЕВОЙ ЗАПУСК НАПРЯМУЮ: Шлем данные через синтаксис SDK v4 со сквозным пробросом Public Key
-            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+            // Прямой боевой вызов встроенной библиотеки без посредников
+            window.emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
                 .then(() => {
-                    console.log('VISTA EMAIL ENCRYPTION DEPLOYED SUCCESSFULLY.');
+                    console.log('VISTA STATUS: PROTOCOL SUCCESS.');
                     showSuccessScreen(ref);
                 })
                 .catch((error) => {
-                    console.error('VISTA EMAIL SYSTEM EXCEPTION:', error);
-                    
-                    // Выводим точную техническую причину отказа
+                    console.error('VISTA STATUS: EXCEPTION.', error);
                     const serverMessage = error && error.text ? error.text : JSON.stringify(error);
-                    alert("SERVER RESPONSE ERROR: " + serverMessage + "\n\nPlease check your EmailJS dashboard keys configuration.");
-                    
-                    if (btn) {
-                        btn.disabled = false;
-                        btn.textContent = "SUBMIT PROTOCOL REQUEST ↗";
-                    }
+                    alert("SERVER PROTOCOL ERROR: " + serverMessage);
+                    if (btn) { btn.disabled = false; btn.textContent = "SUBMIT PROTOCOL REQUEST ↗"; }
                 });
         });
     }
 
-    // Переключатель экранов интерфейса (Скрытие формы -> Показ экрана успеха)
     function showSuccessScreen(ref) {
-        const refElement = document.querySelector("#orderReference");
-        if (refElement) refElement.textContent = ref;
-
+        if (document.querySelector("#orderReference")) document.querySelector("#orderReference").textContent = ref;
         if (form) form.hidden = true;
-        const summaryBox = document.querySelector(".booking-summary-section");
-        const titleBox = document.querySelector(".booking-title");
-        if (summaryBox) summaryBox.hidden = true;
-        if (titleBox) titleBox.hidden = true;
+        if (document.querySelector(".booking-summary-section")) document.querySelector(".booking-summary-section").hidden = true;
+        if (document.querySelector(".booking-title")) document.querySelector(".booking-title").hidden = true;
         if (success) success.hidden = false;
     }
 });
