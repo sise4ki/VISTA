@@ -5,17 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule Protocol Tour | VISTA®</title>
     <link rel="stylesheet" href="css/style.css">
-          <!-- Локальное подключение EmailJS (Больше никаких ошибок сети!) -->
-       <!-- Локальное подключение EmailJS -->
-    <script src="js/email.min.js"></script>
-    <script>
-        if (typeof emailjs !== 'undefined') {
-            // ВАЖНО: Замени эту строку на свой реальный Public Key из личного кабинета EmailJS
-            // Он должен выглядеть примерно так: emailjs.init('user_R93jsKdk83kd93');
-            emailjs.init('NHhUg6GI7SGEqWbYY'); 
-        }
-    </script>
-
+    
+    <!-- ОФИЦИАЛЬНЫЙ CDN СКРИПТ EMAILJS V4 (РЕШАЕТ ПРОБЛЕМУ CORS) -->
+    <script type="text/javascript" src="https://jsdelivr.net"></script>
+</head>
 
 <body class="editorial-property-body">
 
@@ -38,28 +31,28 @@
                 
                 <form id="checkoutForm">
                     <div class="form-step-block">
-    <h2 class="step-heading">1 / INQUIRER DETAILS</h2>
-    <div class="input-group-row">
-        <div class="input-field">
-            <label>GIVEN NAME</label>
-            <input type="text" name="given_name" placeholder="Alexander" required>
-        </div>
-        <div class="input-field">
-            <label>FAMILY NAME</label>
-            <input type="text" name="family_name" placeholder="Wright" required>
-        </div>
-    </div>
-    <div class="input-group-row">
-        <div class="input-field">
-            <label>SECURE EMAIL</label>
-            <input type="email" name="email" placeholder="alex@wright.com" required>
-        </div>
-        <div class="input-field">
-            <label>TELEPHONE CELL</label>
-            <input type="tel" name="phone" placeholder="+1 (310) 555-9000" required>
-        </div>
-    </div>
-</div>
+                        <h2 class="step-heading">1 / INQUIRER DETAILS</h2>
+                        <div class="input-group-row">
+                            <div class="input-field">
+                                <label>GIVEN NAME</label>
+                                <input type="text" name="given_name" placeholder="Alexander" required>
+                            </div>
+                            <div class="input-field">
+                                <label>FAMILY NAME</label>
+                                <input type="text" name="family_name" placeholder="Wright" required>
+                            </div>
+                        </div>
+                        <div class="input-group-row">
+                            <div class="input-field">
+                                <label>SECURE EMAIL</label>
+                                <input type="email" name="email" placeholder="alex@wright.com" required>
+                            </div>
+                            <div class="input-field">
+                                <label>TELEPHONE CELL</label>
+                                <input type="tel" name="phone" placeholder="+1 (310) 555-9000" required>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- СЕКЦИЯ 2 -->
                     <div class="form-step-block">
@@ -98,7 +91,7 @@
                 <div class="sticky-summary-box">
                     <span class="summary-tag">// SELECTED INVESTMENTS</span>
                     
-                    <!-- Сюда твой JS динамически вставит карточку выбранного дома (#checkoutItems) -->
+                    <!-- Сюда JS динамически вставит карточку выбранного дома (#checkoutItems) -->
                     <div id="checkoutItems"></div>
 
                     <div class="asset-value-row">
@@ -110,13 +103,9 @@
 
         </div>
     </main>
-    <!-- Подключаем базу данных VISTA (ОБЯЗАТЕЛЬНО ДОЛЖНА БЫТЬ ВЫШЕ ЧЕКАУТА) -->
-    <script src="js/properties-data.js"></script> 
-    
-    <!-- Твой текущий скрипт обработки оформления (Revenue / Acquisition Processing) -->
-    <script src="js/checkout.js"></script> 
-</body>
-</html>
 
+    <!-- ПОДКЛЮЧАЕМ СКРИПТЫ СТРОГО В ПРАВИЛЬНОМ ПОРЯДКЕ -->
+    <script src="js/properties-data.js"></script> 
+    <script src="js/checkout.js"></script> 
 </body>
 </html>
