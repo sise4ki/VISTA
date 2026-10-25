@@ -30,7 +30,7 @@ if %errorlevel% equ 0 (
     echo.
     echo ===================================================
     echo   [3/3] УСПЕШНО! ВСЕ ФАЙЛЫ ПРОЕКТА НА ГИТХАБЕ!
-    echo   Ссылка на сайт: https://github.io
+    echo   Ссылка на сайт: https://github.com/sise4ki/VISTA.git
     echo ===================================================
 ) else (
     echo.
