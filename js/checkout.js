@@ -1,13 +1,11 @@
 // ==========================================================================
-// VISTA® ARCHITECTURAL REVENUE — ACQUISITION PROTOCOL (SDK v4 COMPATIBLE)
+// VISTA® ARCHITECTURAL REVENUE — ACQUISITION PROTOCOL (FINAL BOEVOY MODE)
 // ==========================================================================
 
-// 🚨 НАСТРОЙКА EMAILJS: Обязательно вставь сюда свои ключи из личного кабинета EmailJS!
-// ВСТАВЬ СВОИ РЕАЛЬНЫЕ БУКВЕННО-ЦИФРОВЫЕ ИДЕНТИФИКАТОРЫ СТРОГО В КАВЫЧКАХ
+// 🚨 НАСТРОЙКА EMAILJS: Твои актуальные рабочие ключи
 const EMAILJS_PUBLIC_KEY  = "NHhUg6GI7SGEqWbYY";   
 const EMAILJS_SERVICE_ID  = "service_addicku";   
 const EMAILJS_TEMPLATE_ID = "template_fotdhjc";  
-
 
 window.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("#checkoutForm");
@@ -83,17 +81,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 request_hash: ref
             };
 
-            // Если ключи до сих пор не настроены пользователем, включаем тестовую симуляцию успеха
-            if (EMAILJS_PUBLIC_KEY === "NHhUg6GI7SGEqWbYY" || EMAILJS_SERVICE_ID === "service_addicku") {
-                console.warn("VISTA STATUS: EmailJS keys are not set. Simulating success workflow.");
-                setTimeout(() => showSuccessScreen(ref), 1000);
-                return;
-            }
-
-            // Если библиотека заблокирована AdBlock или не подключена в HTML
+            // ЗАЩИТА: Проверяем, что библиотека инициализирована и не заблокирована AdBlock расширениями
             if (typeof emailjs === "undefined") {
                 console.error("VISTA STATUS: EmailJS SDK library failed to detect.");
-                alert("SYSTEM ERROR: EmailJS library is not loaded. Please ensure the CDN script tag in book.html is placed correctly.");
+                alert("SYSTEM ERROR: EmailJS library is not loaded. Please ensure the script tag in book.html is placed correctly.");
                 if (btn) {
                     btn.disabled = false;
                     btn.textContent = "SUBMIT PROTOCOL REQUEST ↗";
@@ -101,7 +92,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // БОЕВОЙ ЗАПУСК: Отправка через синтаксис SDK v4 со сквозным пробросом Public Key
+            // БОЕВОЙ ЗАПУСК НАПРЯМУЮ: Шлем данные через синтаксис SDK v4 со сквозным пробросом Public Key
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
                 .then(() => {
                     console.log('VISTA EMAIL ENCRYPTION DEPLOYED SUCCESSFULLY.');
