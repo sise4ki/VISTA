@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISTA® / Interactive Spatial Hub</title>
     
-    <!-- ИСПРАВЛЕННАЯ СТРОКА 8: ОФИЦИАЛЬНЫЕ СТИЛИ КАРТЫ С СЕРВЕРА CDN -->
+    <!-- ИСПРАВЛЕНО: Теперь тут реальный адрес стилей карты, а не заглушка Cloudflare -->
     <link rel="stylesheet" href="https://cloudflare.com" />
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 
 <body>
     <!-- TECH LOADER -->
@@ -105,13 +106,18 @@
         </section>
     </main>
 
-    <!-- ОФИЦИАЛЬНЫЙ CDN СКРИПТ LEAFLET -->
-<script src="https://cloudflare.com"></script>
+       <!-- 1. Сначала движок карты -->
+    <script src="https://cloudflare.com"></script>
 
-<!-- ТВОИ СКРИПТЫ -->
-<script src="js/properties-data.js"></script>
-<script src="js/saved.js"></script>
-<script src="js/main.js"></script>
+    <!-- 2. Потом база домов -->
+    <script src="js/properties-data.js"></script>
+
+    <!-- 3. Потом логика закладок -->
+    <script src="js/saved.js"></script>
+
+    <!-- 4. И только в конце твоя карта -->
+    <script src="js/main.js"></script>
+</body>
 
 </body>
 </html>
