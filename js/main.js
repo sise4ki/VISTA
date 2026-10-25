@@ -1,4 +1,4 @@
-// VISTA® — IMAGE-BASED SPATIAL CORE ENGINE (HYPER-STABLE)
+// VISTA® — HIGH-RESOLUTION SPATIAL ENGINE (PROPERSTAR EDITORIAL STYLING)
 
 window.addEventListener("DOMContentLoaded", () => {
     // Мгновенно удаляем лоадер заставки
@@ -8,41 +8,62 @@ window.addEventListener("DOMContentLoaded", () => {
     const mapContainer = document.querySelector('#map');
     if (!mapContainer) return;
 
-    // Функция инициализации, которая сработает только когда Leaflet готов
     function initVistamap() {
         if (typeof L === "undefined") {
-            // Если Leaflet еще не прогрузился, ждем еще 50 миллисекунд и пробуем снова
             setTimeout(initVistamap, 50);
             return;
         }
 
-        console.log("VISTA CORE: Leaflet successfully detected. Launching map...");
-
-        // НАСТРОЙКА ХОЛСТА ПОД ЛОКАЛЬНОЕ ИЗОБРАЖЕНИЕ (2400 x 1460 px)
+        // Центрируем карту строго по центру США с идеальным приближением (Zoom: 4)
         const map = L.map('map', {
-            crs: L.CRS.Simple,
-            minZoom: -2,
-            maxZoom: 2,
-            zoomDelta: 1,
-            snapZoom: 1
-        });
+            zoomControl: true,
+            minZoom: 3,
+            maxZoom: 18
+        }).setView([37.0902, -95.7129], 4); 
 
-        const w = 2400;
-        const h = 1460;
-        const bounds = [[0, 0], [h, w]];
+        // Подключаем светлые классические плитки OpenStreetMap с голубыми океанами
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
 
-        // Накладываем изображение карты из папки assets
-        L.imageOverlay('assets/map-bg.jpg', bounds).addTo(map);
-        map.fitBounds(bounds);
-
-        // Пиксельные координаты вилл
+        // ТОЧНЫЕ РЕАЛЬНЫЕ КООРДИНАТЫ ДОМОВ В США (Широта и Долгота)
         const realEstateMarkers = [
-            { pixelCoords: [100, 200], name: "THE SUNSET PACIFIC VILLA", price: "$8,500,000", locText: "MALIBU, CA", link: "property.html?house=malibu-sunset-villa", img: "assets/malibu-villa.jpg" },
-            { pixelCoords: [300, 400], name: "BEL AIR MINIMALIST ESTATE", price: "$12,900,000", locText: "LOS ANGELES, CA", link: "property.html?house=la-modern-estate", img: "assets/la-estate.jpg" },
-            { pixelCoords: [500, 600], name: "BRICKELL SKY PENTHOUSE", price: "$4,200,000", locText: "MIAMI, FL", link: "property.html?house=miami-penthouse", img: "assets/miami-penthouse.jpg" },
-            { pixelCoords: [700, 800], name: "SOHO ARCHITECTURAL LOFT", price: "$5,600,000", locText: "NEW YORK, NY", link: "property.html?house=ny-luxury-loft", img: "assets/ny-loft.jpg" }
+            {
+                coords: [34.0259, -118.7798], // Реальный Малибу, Калифорния
+                name: "THE SUNSET PACIFIC VILLA",
+                price: "$8,500,000",
+                locText: "MALIBU, CA",
+                link: "property.html?house=malibu-sunset-villa",
+                img: "assets/malibu-villa.jpg"
+            },
+            {
+                coords: [34.0837, -118.4466], // Реальный Бель-Эйр, Лос-Анджелес
+                name: "BEL AIR MINIMALIST ESTATE",
+                price: "$12,900,000",
+                locText: "LOS ANGELES, CA",
+                link: "property.html?house=la-modern-estate",
+                img: "assets/la-estate.jpg"
+            },
+            {
+                coords: [25.7617, -80.1918], // Реальный Брикелл, Майами, Флорида
+                name: "BRICKELL SKY PENTHOUSE",
+                price: "$4,200,000",
+                locText: "MIAMI, FL",
+                link: "property.html?house=miami-penthouse",
+                img: "assets/miami-penthouse.jpg"
+            },
+            {
+                coords: [40.7233, -74.0030], // Реальный Сохо, Нью-Йорк
+                name: "SOHO ARCHITECTURAL LOFT",
+                price: "$5,600,000",
+                locText: "NEW YORK, NY",
+                link: "property.html?house=ny-luxury-loft",
+                img: "assets/ny-loft.jpg"
+            }
         ];
 
+        // Кастомизируем маркер под неоновые синие точки Properstar
         const customIcon = L.divIcon({
             className: 'custom-map-marker',
             html: '<div class="pin-pulse-light"></div><div class="pin-dot-proper"></div>',
@@ -50,6 +71,7 @@ window.addEventListener("DOMContentLoaded", () => {
             iconAnchor: [10, 10]
         });
 
+        // Расставляем маркеры по Америке
         realEstateMarkers.forEach(data => {
             const popupContent = `
                 <div class="map-popup-card">
@@ -59,16 +81,20 @@ window.addEventListener("DOMContentLoaded", () => {
                         <span style="font-size:9px; color:#384a37; font-weight:600; display:block; margin:3px 0 6px; font-family:monospace;">${data.price} // ${data.locText}</span>
                         <a href="${data.link}" style="display:block; font-size:9px; font-weight:700; text-decoration:none; color:#111; border-top:1px solid #eee; padding-top:5px; letter-spacing:0.5px; font-family:monospace;">VIEW SPECIFICATION →</a>
                     </div>
-                </div>`;
+                </div>
+            `;
 
-            L.marker(data.pixelCoords, { icon: customIcon })
+            L.marker(data.coords, { icon: customIcon })
                 .addTo(map)
-                .bindPopup(popupContent, { maxWidth: 240, className: 'vista-custom-popup' });
+                .bindPopup(popupContent, {
+                    maxWidth: 240,
+                    className: 'vista-custom-popup'
+                });
         });
 
-        setTimeout(() => { map.invalidateSize(); }, 300);
+        // Моментальный пересчет размеров холста, чтобы карта не сжималась
+        setTimeout(() => { map.invalidateSize(); }, 200);
     }
 
-    // Запускаем нашу безопасную проверку
     initVistamap();
 });
