@@ -1102,21 +1102,17 @@ a:hover {
 }
 /* ===== VISTA® INTERACTIVE MAP VIEWPORT RECOVERY ===== */
 
-/* Ищем блок твоей карты. Если у тебя в HTML задан класс .map или id="map", 
-   эти стили жестко заставят его отображаться */
-#map, 
-.map-container, 
-#spatial-engine-map,
-.catalog-inner-scroll ~ div { /* Авто-захват блока карты рядом с каталогом */
-    min-height: 100vh !important; /* Карта займет всю высоту экрана */
+#map, .map-container, #spatial-engine-map, .catalog-inner-scroll ~ div {
+    min-height: 100vh !important;
     height: 100% !important;
     width: 100% !important;
-    background-color: #111310 !important; /* Благородный черный фон на время загрузки */
+    background-color: transparent !important; /* ТУТ БЫЛО #111310, ОНО МОГЛО ПЕРЕКРЫВАТЬ ИЗОБРАЖЕНИЕ */
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     z-index: 1 !important;
 }
+
 
 
 
